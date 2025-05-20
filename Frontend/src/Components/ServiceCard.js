@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ id, title, description, color }) => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  
+  const handleUseItClick = async (e) => {
+    e.stopPropagation(); // Prevent card click when button is clicked
+    
+    // Set loading state
+    setIsLoading(true);
+      window.location.href = `https://dev.gtwy.ai/new?template_id=${id}`;
+      setIsLoading(false);
+    
+  };
 
   return (
     <div 
@@ -30,16 +42,14 @@ const ServiceCard = ({ id, title, description, color }) => {
               <span className="text-sm text-gray-500">openai</span>
               <span className="text-sm font-medium text-gray-700">gpt-4o</span>
               <button
-                className="px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-lg
-                           hover:bg-green-700 active:bg-green-800
+                className={`px-4 py-2 ${isLoading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700 active:bg-green-800'} 
+                           text-white text-xs font-bold rounded-lg
                            transition duration-300
-                           shadow-md hover:shadow-lg"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent card click when button is clicked
-                  navigate(`/${id}`);
-                }}
+                           shadow-md hover:shadow-lg`}
+                onClick={handleUseItClick}
+                disabled={isLoading}
               >
-                USE IT
+                {isLoading ? "LOADING..." : "USE IT"}
               </button>
             </div>
           </div>
