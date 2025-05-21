@@ -11,7 +11,8 @@ const ServicesPage = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch("http://localhost:7072/template/all");
+       const response = await fetch(`${process.env.REACT_APP_backend_url}/template/all`);
+
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
 

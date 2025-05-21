@@ -11,7 +11,7 @@ const ServiceCard = ({ id, title, description, color }) => {
     
     // Set loading state
     setIsLoading(true);
-      window.location.href = `https://dev.gtwy.ai/new?template_id=${id}`;
+      window.location.href = `${process.env.REACT_APP_gtwy_url}/new?template_id=${id}`;
       setIsLoading(false);
     
   };
